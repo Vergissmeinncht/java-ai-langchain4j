@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Appointment {
 
     @TableId(type = IdType.AUTO)
-    private long id;
+    private Long id;
     private String username;
     private String idCard;
     private String department;
