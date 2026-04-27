@@ -15,13 +15,24 @@
 
 * **编程语言**: Java (100%)
 * **核心框架**: LangChain4j
-* **其他相关**: (可以在这里补充你使用的向量数据库，例如 Chroma、Milvus，或者使用的构建工具 Maven/Gradle 等)
+* **其他相关**: MySQL，MongoDB，PostgreSQL
 
 ## 📁 核心模块
 
-* `Agent`: 包含智能代理的实现代码，测试大模型如何自主调用函数。
-* `RAG`: 包含文档解析、向量化嵌入（Embedding）以及结合检索的问答实现。
-* *(根据你的实际包结构在此处进行修改)*
+* `assistant` (智能代理层): 
+  * 包含 `XiaoZhiAgent`、`SeparateChatAssistant` 等基于 `@AiService` 定义的 AI 接口。
+  * 实现了将聊天模型、历史记忆（Chat Memory）、系统提示词（SystemMessage）以及外部工具与检索器组装，打造能够自主对话的智能体。
+* `tools` (函数调用/工具层): 
+  * 包含大模型可自主调用的工具函数，如 `AppointmentTools`。
+  * 演示了 LLM 如何根据用户意图解析参数，并执行具体的业务逻辑（如查询医生排班、进行医疗预约挂号、取消预约等）。
+* `store` (持久化存储层): 
+  * 包含如 `MongoChatMemoryStore`，展示了如何自定义 `ChatMemoryStore`，将用户的多轮对话记录持久化存储到 MongoDB 中，实现跨会话的长期记忆隔离。
+* `config` (核心配置层): 
+  * **RAG 检索配置** (`XiaoZhiAgentConfig`): 演示了使用 `FileSystemDocumentLoader` 加载本地文本知识库，切分向量化，并构建 `ContentRetriever`。
+  * **向量数据库配置** (`EembeddingStoreConfig`): 演示了如何集成 `PgVectorEmbeddingStore` (PostgreSQL pgvector) 作为外部向量库存储并管理高维向量数据。
+* `entity / mapper / service` (业务与数据访问层): 
+  * 结合 MyBatis-Plus 提供常规业务实体的增删改查支持（例如预约挂号系统 `Appointment`），为 Agent 工具调用提供底层数据支撑。
+
 
 ## 🚀 快速开始
 
