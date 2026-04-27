@@ -20,7 +20,7 @@ public class EembeddingStoreConfig {
                 .port(5432)
                 .database("java-ai-langchain4j")
                 .user("postgres")
-                .password("zhangqi9029")
+                .password("****")
                 .table("vectors") // 指定存储向量的表名
                 .dimension(1024)         // 向量维度，需要与你使用的 Embedding 模型维度一致
                 .useIndex(false)         // 关闭 IVFFlat 索引加速检索，IVFFlat只适用于数据很多的时候，少量测试需要关闭，不然后面查找可能会查找不到！！
